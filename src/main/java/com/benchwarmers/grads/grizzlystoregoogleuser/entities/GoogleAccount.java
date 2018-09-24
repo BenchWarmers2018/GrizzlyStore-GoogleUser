@@ -4,6 +4,7 @@ import com.benchwarmers.grads.grizzlystoregoogleuser.entities.Profile;
 import com.benchwarmers.grads.grizzlystoregoogleuser.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -19,6 +20,7 @@ public class GoogleAccount extends Data {
             name = "UUID",
             strategy = "org.hibernate.id.UUIDGenerator"
     )
+    @Type(type="uuid-char")
     @Column(name = "id_Account", updatable = false, nullable = false)
     private UUID idGoogleAccount;
 
