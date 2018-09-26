@@ -3,26 +3,17 @@ package com.benchwarmers.grads.grizzlystoregoogleuser.entities;
 import com.benchwarmers.grads.grizzlystoregoogleuser.entities.Profile;
 import com.benchwarmers.grads.grizzlystoregoogleuser.Data;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Date;
-import java.util.UUID;
 
 @Entity
 @Table(name="GoogleAccount")
 public class GoogleAccount extends Data {
     @Id
-    @GeneratedValue(generator = "UUID")
-    @GenericGenerator(
-            name = "UUID",
-            strategy = "org.hibernate.id.UUIDGenerator"
-    )
-    @Type(type="uuid-char")
-    @Column(name = "id_Account", updatable = false, nullable = false)
-    private UUID idGoogleAccount;
+    @Column(name = "id_Account", nullable = false)
+    private String idGoogleAccount;
 
     @Column(name = "account_EmailAddress", nullable = false, unique = true)
     @Email
@@ -36,11 +27,11 @@ public class GoogleAccount extends Data {
     @OneToOne(mappedBy = "googleAccount")
     private Profile profile;
 
-    public UUID getIdGoogleAccount() {
+    public String getIdGoogleAccount() {
         return idGoogleAccount;
     }
 
-    public void setIdGoogleAccount(UUID idGoogleAccount) {
+    public void setIdGoogleAccount(String idGoogleAccount) {
         this.idGoogleAccount = idGoogleAccount;
     }
 
