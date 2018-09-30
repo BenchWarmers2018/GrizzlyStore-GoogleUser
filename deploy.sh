@@ -2,7 +2,7 @@
 echo 'Deployment in progress'
 pwd && cd target
 
-if (( $(ps -ef | grep -v grep | grep grizzlystore-googleUser | wc -l) > 0)) 
+if (( $(ps -ef | grep -v grep | grep grizzlystore-googleuser | wc -l) > 0)) 
 	then
 		echo "Google User service is running...attempting to stop service!"
 		sudo systemctl stop grizzlystore-googleuser.service || true
