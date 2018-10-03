@@ -1,27 +1,24 @@
 pipeline {
    agent any
    stages {
-      stage('Compile Stage') {
+      stage('Build') {
          steps {
-            echo 'Compiling project'
-            sh 'mvn clean compile -DskipTests=true'
+            echo 'BUILDING PROJECT!!'
+            withMaven(maven: 'mvn') {
+               sh 'mvn -B -DskipTests clean package'
+            }
          }
       }
-      stage('Test Stage') {
+      stage('Test') {
          steps {
-            echo 'Running tests'
+            echo 'Testing in progress'
             sh 'mvn test'
          }
       }
-      stage('Package Stage') {
-      	steps {
-            echo 'Packaging project'
-      		sh 'mvn clean package'
-      	}
-      }
-      stage('Deployment Stage') {
+      stage('Deploy') {
          steps {
             sh 'bash ./deploy.sh'
+            /* sh 'mvn spring-boot:run'  java -jar grizzly-store-spring-1.0-SNAPSHOT.jar*/
          }
       }
    }
