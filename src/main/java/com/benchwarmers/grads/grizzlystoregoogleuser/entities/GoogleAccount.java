@@ -1,6 +1,5 @@
 package com.benchwarmers.grads.grizzlystoregoogleuser.entities;
 
-import com.benchwarmers.grads.grizzlystoregoogleuser.entities.Profile;
 import com.benchwarmers.grads.grizzlystoregoogleuser.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -21,7 +20,7 @@ public class GoogleAccount extends Data {
             strategy = "org.hibernate.id.UUIDGenerator"
     )
     @Type(type="uuid-char")
-    @Column(name = "id_Account", updatable = false, nullable = false)
+    @Column(name = "id_Account", nullable = false, updatable = false)
     private UUID idGoogleAccount;
 
     @Column(name = "account_EmailAddress", nullable = false, unique = true)
@@ -33,9 +32,19 @@ public class GoogleAccount extends Data {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModified;
 
-    @OneToOne(mappedBy = "googleAccount")
-    private Profile profile;
 
+
+    @OneToOne(mappedBy = "googleAccount", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private GoogleProfile profile;
+
+    public GoogleProfile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(GoogleProfile profile) {
+        profile.setGoogleAccount(this);
+        this.profile = profile;
+    }
     public UUID getIdGoogleAccount() {
         return idGoogleAccount;
     }

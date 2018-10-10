@@ -7,7 +7,10 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface GoogleAccount_Repository extends JpaRepository<GoogleAccount, UUID> {
+public interface GoogleAccount_Repository extends JpaRepository<GoogleAccount, String> {
     GoogleAccount findByGoogleAccountEmailAddress(String emailAddress);
     boolean existsByGoogleAccountEmailAddress(String emailAddress);
+    boolean existsGoogleAccountByGoogleAccountEmailAddress(String email);
+    GoogleAccount findByIdGoogleAccount(String idGoogleAccount);
+    boolean existsByIdGoogleAccount(String idGoogleAccount);
 }

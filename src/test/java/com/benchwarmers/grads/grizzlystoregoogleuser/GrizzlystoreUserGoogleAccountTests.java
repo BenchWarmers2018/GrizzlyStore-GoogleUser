@@ -25,7 +25,7 @@ public class GrizzlystoreUserGoogleAccountTests {
     public void setup() {
         MockitoAnnotations.initMocks(this);
         testGoogleAccount = new GoogleAccount();
-        testGoogleAccount.setIdGoogleAccount(UUID.randomUUID());
+//        testGoogleAccount.setIdGoogleAccount(UUID.randomUUID());
         testGoogleAccount.setGoogleAccountEmailAddress("ANTO@gmail.com");
         testGoogleAccount.setLastModified(Date.from(Instant.now()));
         Mockito.when(mockedGoogleAccountRepository.save( Mockito.any(GoogleAccount.class) )).thenReturn(testGoogleAccount);
