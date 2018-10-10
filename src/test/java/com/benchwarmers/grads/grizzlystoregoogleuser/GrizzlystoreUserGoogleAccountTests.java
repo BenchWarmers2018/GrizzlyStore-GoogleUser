@@ -50,11 +50,11 @@ public class GrizzlystoreUserGoogleAccountTests {
         Assert.assertNotEquals("anto@abc.com", newAccount.getGoogleAccountEmailAddress());
     }
 
-    @Test
-    public void accountHasUUID() {
-        GoogleAccount newAccount = mockedGoogleAccountRepository.save(new GoogleAccount());
-        Assert.assertNotNull(newAccount.getIdGoogleAccount());
-    }
+//    @Test
+//    public void accountHasUUID() {
+//        GoogleAccount newAccount = mockedGoogleAccountRepository.save(new GoogleAccount());
+//        Assert.assertNotNull(newAccount.getIdGoogleAccount());
+//    }
 
     @Test
     public void accountHasLastModifiedDatetime() {
