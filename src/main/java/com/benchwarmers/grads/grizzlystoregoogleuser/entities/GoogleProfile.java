@@ -1,6 +1,7 @@
 package com.benchwarmers.grads.grizzlystoregoogleuser.entities;
 
 import com.benchwarmers.grads.grizzlystoregoogleuser.Data;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -8,23 +9,23 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Profile")
-public class Profile extends Data {
+public class GoogleProfile extends Data {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_Profile", nullable = false)
     private Integer idProfile;
 
-    @Column(name = "profile_FirstName", nullable = false)
+    @Column(name = "profile_FirstName")
     private String profileFirstName;
 
-    @Column(name = "profile_LastName", nullable = false)
+    @Column(name = "profile_LastName")
     private String profileLastName;
 
-    @Column(name = "profile_PhoneNumber", nullable = false)
+    @Column(name = "profile_PhoneNumber")
     private String profilePhoneNumber;
 
-    @Column(name = "profile_Image", nullable = false)
+    @Column(name = "profile_Image")
     private String profileImage;
 
     @CreationTimestamp
@@ -36,8 +37,13 @@ public class Profile extends Data {
             orphanRemoval = true
     )
     @JoinColumn(name = "id_googleaccount_foreign", nullable = false)
+    @JsonIgnore
     private GoogleAccount googleAccount;
 
+
+    public void setGoogleAccount(GoogleAccount googleAccount) {
+        this.googleAccount = googleAccount;
+    }
     //Getter and Setters.
     public GoogleAccount getGoogleAccount() {
         return googleAccount;
@@ -94,5 +100,4 @@ public class Profile extends Data {
     public void setLastModified(Date last_modified) {
         this.lastModified = last_modified;
     }
-
 }

@@ -10,6 +10,7 @@ import java.util.UUID;
 public interface GoogleAccount_Repository extends JpaRepository<GoogleAccount, String> {
     GoogleAccount findByGoogleAccountEmailAddress(String emailAddress);
     boolean existsByGoogleAccountEmailAddress(String emailAddress);
+    boolean existsGoogleAccountByGoogleAccountEmailAddress(String email);
     GoogleAccount findByIdGoogleAccount(String idGoogleAccount);
     boolean existsByIdGoogleAccount(String idGoogleAccount);
 }

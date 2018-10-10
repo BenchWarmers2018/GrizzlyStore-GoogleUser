@@ -1,19 +1,27 @@
 package com.benchwarmers.grads.grizzlystoregoogleuser.entities;
 
-import com.benchwarmers.grads.grizzlystoregoogleuser.entities.Profile;
 import com.benchwarmers.grads.grizzlystoregoogleuser.Data;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.util.Date;
+import java.util.UUID;
 
 @Entity
 @Table(name="GoogleAccount")
 public class GoogleAccount extends Data {
     @Id
-    @Column(name = "id_Account", nullable = false)
-    private String idGoogleAccount;
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(
+            name = "UUID",
+            strategy = "org.hibernate.id.UUIDGenerator"
+    )
+    @Type(type="uuid-char")
+    @Column(name = "id_Account", nullable = false, updatable = false)
+    private UUID idGoogleAccount;
 
     @Column(name = "account_EmailAddress", nullable = false, unique = true)
     @Email
@@ -24,14 +32,24 @@ public class GoogleAccount extends Data {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastModified;
 
-    @OneToOne(mappedBy = "googleAccount")
-    private Profile profile;
 
-    public String getIdGoogleAccount() {
+
+    @OneToOne(mappedBy = "googleAccount", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private GoogleProfile profile;
+
+    public GoogleProfile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(GoogleProfile profile) {
+        profile.setGoogleAccount(this);
+        this.profile = profile;
+    }
+    public UUID getIdGoogleAccount() {
         return idGoogleAccount;
     }
 
-    public void setIdGoogleAccount(String idGoogleAccount) {
+    public void setIdGoogleAccount(UUID idGoogleAccount) {
         this.idGoogleAccount = idGoogleAccount;
     }
 
