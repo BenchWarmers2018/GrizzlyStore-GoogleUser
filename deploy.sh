@@ -1,8 +1,16 @@
 #!/usr/bin/env bash
-
-echo 'Deployment in process'
+echo 'Deployment in progress'
 pwd && cd target
-sudo systemctl stop grizzly-google.service || true
-sudo rm /etc/init.d/grizzly-google || true
-sudo ln -s grizzlystoregoogleuser-0.0.1-SNAPSHOT.jar /etc/init.d/grizzly-google
-sudo systemctl start grizzly-google.service
+
+if (( $(ps -ef | grep -v grep | grep grizzlystore-googleuser | wc -l) > 0)) 
+	then
+		echo "Google User service is running...attempting to stop service!"
+		sudo systemctl stop grizzlystore-googleuser.service || true
+fi
+
+if [ -f grizzlystore-googleuser ] ; then
+    sudo rm /etc/init.d/grizzlystore-googleuser || true
+fi
+
+cp *.jar /opt/GrizzlyStoreMicroServices/grizzlystore-googleuser.jar
+sudo systemctl start grizzlystore-googleuser.service
