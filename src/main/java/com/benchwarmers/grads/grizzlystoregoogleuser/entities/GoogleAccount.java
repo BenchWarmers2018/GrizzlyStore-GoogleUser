@@ -21,11 +21,11 @@ public class GoogleAccount extends Data {
     )
     @Type(type="uuid-char")
     @Column(name = "id_Account", nullable = false, updatable = false)
-    private UUID idGoogleAccount;
+    private UUID idAccount;
 
     @Column(name = "account_EmailAddress", nullable = false, unique = true)
     @Email
-    private String googleAccountEmailAddress;
+    private String accountEmailAddress;
 
     @CreationTimestamp
     @Column(name = "DateTime", nullable = false)
@@ -46,19 +46,19 @@ public class GoogleAccount extends Data {
         this.profile = profile;
     }
     public UUID getIdGoogleAccount() {
-        return idGoogleAccount;
+        return idAccount;
     }
 
-    public void setIdGoogleAccount(UUID idGoogleAccount) {
-        this.idGoogleAccount = idGoogleAccount;
+    public void setIdGoogleAccount(UUID idAccount) {
+        this.idAccount = idAccount;
     }
 
     public String getGoogleAccountEmailAddress() {
-        return googleAccountEmailAddress;
+        return accountEmailAddress;
     }
 
-    public void setGoogleAccountEmailAddress(String googleAccountEmailAddress) {
-        this.googleAccountEmailAddress = googleAccountEmailAddress.toLowerCase();
+    public void setGoogleAccountEmailAddress(String accountEmailAddress) {
+        this.accountEmailAddress = accountEmailAddress.toLowerCase();
     }
 
     public Date getLastModified() {
