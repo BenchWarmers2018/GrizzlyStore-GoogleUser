@@ -23,7 +23,7 @@ public class GoogleAccount extends Data {
     @Column(name = "id_Account", nullable = false, updatable = false)
     private UUID idAccount;
 
-    @Column(name = "account_EmailAddress", nullable = false, unique = true)
+    @Column(name = "accountEmailAddress", nullable = false, unique = true)
     @Email
     private String accountEmailAddress;
 
@@ -45,20 +45,20 @@ public class GoogleAccount extends Data {
         profile.setGoogleAccount(this);
         this.profile = profile;
     }
-    public UUID getIdGoogleAccount() {
+    public UUID getIdAccount() {
         return idAccount;
     }
 
-    public void setIdGoogleAccount(UUID idAccount) {
+    public void setIdAccount(UUID idAccount) {
         this.idAccount = idAccount;
     }
 
-    public String getGoogleAccountEmailAddress() {
+    public String getAccountEmailAddress() {
         return accountEmailAddress;
     }
 
-    public void setGoogleAccountEmailAddress(String accountEmailAddress) {
-        this.accountEmailAddress = accountEmailAddress.toLowerCase();
+    public void setAccountEmailAddress(String accountEmailAddress) {
+        this.accountEmailAddress = accountEmailAddress;
     }
 
     public Date getLastModified() {

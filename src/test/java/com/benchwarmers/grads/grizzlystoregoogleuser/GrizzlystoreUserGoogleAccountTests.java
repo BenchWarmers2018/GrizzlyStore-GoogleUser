@@ -26,7 +26,7 @@ public class GrizzlystoreUserGoogleAccountTests {
         MockitoAnnotations.initMocks(this);
         testGoogleAccount = new GoogleAccount();
 //        testGoogleAccount.setIdGoogleAccount(UUID.randomUUID());
-        testGoogleAccount.setGoogleAccountEmailAddress("ANTO@gmail.com");
+        testGoogleAccount.setAccountEmailAddress("ANTO@gmail.com");
         testGoogleAccount.setLastModified(Date.from(Instant.now()));
         Mockito.when(mockedGoogleAccountRepository.save( Mockito.any(GoogleAccount.class) )).thenReturn(testGoogleAccount);
     }
@@ -40,14 +40,14 @@ public class GrizzlystoreUserGoogleAccountTests {
     @Test
     public void googleAccountHasCorrectEmailAddress() {
         GoogleAccount newAccount = mockedGoogleAccountRepository.save(new GoogleAccount());
-        Assert.assertEquals("anto@gmail.com", newAccount.getGoogleAccountEmailAddress());
+        Assert.assertEquals("anto@gmail.com", newAccount.getAccountEmailAddress());
     }
 
     @Test
     public void accountHasIncorrectEmailAddress() {
         GoogleAccount newAccount = mockedGoogleAccountRepository.save(new GoogleAccount());
-        newAccount.setGoogleAccountEmailAddress("Anto@xyz.com");
-        Assert.assertNotEquals("anto@abc.com", newAccount.getGoogleAccountEmailAddress());
+        newAccount.setAccountEmailAddress("Anto@xyz.com");
+        Assert.assertNotEquals("anto@abc.com", newAccount.getAccountEmailAddress());
     }
 
 //    @Test
