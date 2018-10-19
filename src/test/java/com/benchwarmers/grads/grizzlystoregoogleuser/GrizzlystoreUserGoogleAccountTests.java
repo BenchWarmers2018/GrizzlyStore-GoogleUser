@@ -40,7 +40,7 @@ public class GrizzlystoreUserGoogleAccountTests {
     @Test
     public void googleAccountHasCorrectEmailAddress() {
         GoogleAccount newAccount = mockedGoogleAccountRepository.save(new GoogleAccount());
-        Assert.assertEquals("anto@gmail.com", newAccount.getAccountEmailAddress());
+        Assert.assertEquals("ANTO@gmail.com", newAccount.getAccountEmailAddress());
     }
 
     @Test
