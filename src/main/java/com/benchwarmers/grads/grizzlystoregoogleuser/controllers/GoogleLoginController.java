@@ -15,6 +15,7 @@ import java.sql.SQLOutput;
 @CrossOrigin
 @RequestMapping(path = "/googlelogin")
 public class GoogleLoginController {
+
     @Autowired
     private GoogleAccount_Repository googleAccountRepository;
 
@@ -22,13 +23,13 @@ public class GoogleLoginController {
     public ResponseEntity login (@RequestBody GoogleAccount googleAccount) {
         //Checks if google account already exists in database by email
         JsonResponse response = new JsonResponse();
-        if(!googleAccountRepository.existsByGoogleAccountEmailAddress(googleAccount.getGoogleAccountEmailAddress())){
+        if(!googleAccountRepository.existsByAccountEmailAddress(googleAccount.getAccountEmailAddress())){
 
             //If account doesn't exist, make new google account
             GoogleAccount newGoogleAccount = new GoogleAccount();
             GoogleProfile googleProfile = new GoogleProfile();
             //Popularise
-            newGoogleAccount.setGoogleAccountEmailAddress(googleAccount.getGoogleAccountEmailAddress());
+            newGoogleAccount.setAccountEmailAddress(googleAccount.getAccountEmailAddress());
             newGoogleAccount.setProfile(googleProfile);
             googleAccountRepository.save(newGoogleAccount);
             response.setStatus(HttpStatus.OK);
@@ -37,7 +38,7 @@ public class GoogleLoginController {
             return response.createResponse();
         }
         else {
-            GoogleAccount existingAccount = getExistingAccount(googleAccount.getGoogleAccountEmailAddress());
+            GoogleAccount existingAccount = getExistingAccount(googleAccount.getAccountEmailAddress());
             response.setStatus(HttpStatus.OK);
             response.addEntity(existingAccount);
             System.out.println("EXISTING ACCOUNT HAS BEEN RETURNED");
@@ -47,7 +48,7 @@ public class GoogleLoginController {
 
 
     private GoogleAccount getExistingAccount(String email) {
-        return googleAccountRepository.findByGoogleAccountEmailAddress(email);
+        return googleAccountRepository.findByAccountEmailAddress(email);
     }
 
 
